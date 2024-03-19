@@ -205,8 +205,8 @@ def filemap(map)
 end
 
 COPIED_FILES = filemap(
-  'vimrc.local'         => '~/.vimrc.local',
-  'vimrc.bundles.local' => '~/.vimrc.bundles.local',
+  # 'vimrc.local'         => '~/.vimrc.local',
+  # 'vimrc.bundles.local' => '~/.vimrc.bundles.local',
   'tmux.conf.local'     => '~/.tmux.conf.local'
 )
 
@@ -214,7 +214,9 @@ LINKED_FILES = filemap(
   'vim'           => '~/.vim',
   'tmux.conf'     => '~/.tmux.conf',
   'vimrc'         => '~/.vimrc',
-  'vimrc.bundles' => '~/.vimrc.bundles'
+  'vimrc.bundles' => '~/.vimrc.bundles',
+  'vimrc.local'         => '~/.vimrc.local',
+  'vimrc.bundles.local' => '~/.vimrc.bundles.local',
 )
 
 desc 'Install these config files.'

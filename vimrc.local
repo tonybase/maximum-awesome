@@ -1,4 +1,5 @@
-set nocursorline " don't highlight current line
+" don't highlight current line
+set nocursorline
 
 " keyboard shortcuts
 inoremap jj <ESC>
@@ -9,11 +10,9 @@ inoremap jj <ESC>
 
 " gui settings
 if (&t_Co == 256 || has('gui_running'))
-  if ($TERM_PROGRAM == 'iTerm.app')
-    colorscheme solarized
-  else
-    colorscheme desert
-  endif
+  let g:solarized_termcolors=256
+  colorscheme solarized
+  " colorscheme desert
 endif
 
 " Disambiguate ,a & ,t from the Align plugin, making them fast again.
@@ -31,3 +30,40 @@ function! s:RemoveConflictingAlignMaps()
 endfunction
 command! -nargs=0 RemoveConflictingAlignMaps call s:RemoveConflictingAlignMaps()
 silent! autocmd VimEnter * RemoveConflictingAlignMaps
+
+" custom settings
+set tabstop=4                                                " actual tabs occupy 8 characters
+set shiftwidth=4                                             " normal mode indentation commands use 2 spaces
+set softtabstop=4                                            " insert mode tab and backspace use 2 spaces
+
+" vim-go
+let g:go_fmt_command = "goimports"
+let g:go_highlight_functions = 1
+let g:go_highlight_methods = 1
+let g:go_highlight_fields = 1
+let g:go_highlight_types = 1
+let g:go_highlight_operators = 1
+let g:go_highlight_build_constraints = 1
+let g:syntastic_go_checkers = ['golint', 'govet', 'errcheck']
+nnoremap <C-i> :GoImplements<CR>
+nnoremap <C-r> :GoReferrers<CR>
+
+" vim-snipmate
+let g:snipMate = { 'snippet_version' : 1 }
+let g:typescript_indent_disable = 1
+let g:prettier#config#tab_width = '2'
+autocmd BufWrite *.js,*.ts,*.tsx,*.vue,*.css,*.scss,*.html,*.json :Prettier
+
+" lua format
+autocmd FileType lua nnoremap <buffer> <c-k> :call LuaFormat()<cr>
+autocmd BufWrite *.lua call LuaFormat()
+
+" copy remote
+nmap <leader>c <Plug>OSCYankOperator
+nmap <leader>cc <leader>c_
+vmap <leader>c <Plug>OSCYankVisual
+let g:ycm_clangd_binary_path = trim(system('brew --prefix llvm')).'/bin/clangd'
+
+" auto format
+au BufWrite *.py :Autoformat
+let g:formatter_yapf_style = 'pep8'
