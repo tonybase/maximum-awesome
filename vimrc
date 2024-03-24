@@ -1,5 +1,6 @@
 " don't bother with vi compatibility
 set nocompatible
+set background=dark
 
 " enable syntax highlighting
 syntax enable
